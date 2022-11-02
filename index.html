@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <title></title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: hsla(0, 6%, 21%, 0.507);
+
+        }
+
+        #cards {
+            margin-top: 50px;
+        }
+
+        .card {
+            margin: 50px;
+        }
+
+        #links {
+            width: 100%;
+            height: 200px;
+            background-color: black;
+            padding: 50px;
+        }
+
+        #links a {
+            font-size: 25px;
+            font-weight: 250;
+            color: rgb(143, 157, 78);
+
+        }
+    </style>
+</head>
+<script src="jquery-3.6.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">wmc</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">主页<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#links">友情链接</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">登录</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索博客</button>
+        </form>
+    </div>
+</nav>
+<div class="container" id="cards">
+    <div class="row">
+
+
+    </div>
+</div>
+<div id="links">
+    <a href="#links">友情链接</a><br>
+    <a href="http://ender.cool">ender的博客</a>
+</div>
+<script>
+    let template = ' <div class="col-sm">\n' +
+        '            <div class="card" style="width: 18rem;">\n' +
+        '                <img class="card-img-top"\n' +
+        '                     src="https://ts1.cn.mm.bing.net/th/id/R-C.f5a641617304082c65927e276d9b79b2?rik=swy%2fVpld0RlsBQ&riu=http%3a%2f%2fn.sinaimg.cn%2fsinakd20201115ac%2f687%2fw869h618%2f20201115%2f522e-kcysmrv6603543.png&ehk=Yf6tBNNVbnUu%2fm8DmseCXH5pDOIRMjSm3SHtJ485EMg%3d&risl=&pid=ImgRaw&r=0"\n' +
+        '                     alt="Card image cap">\n' +
+        '                <div class="card-body">\n' +
+        '                    <h5 class="card-title">TITLE</h5>\n' +
+        '                    <p class="card-text">SKETCH</p>\n' +
+        '                    <a href="#" class="btn btn-primary">查看</a>\n' +
+        '                </div>\n' +
+        '            </div>\n' +
+        '        </div>'
+    $.get("/api/sketch.php",function (data) {
+        console.log(data)
+        for (let i of data) {
+            console.log(i)
+            $('.row').append(template.replace('TITLE',i[1]).replace('SKETCH',i[3]))
+
+        }
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <title></title>
+    <meta charset="utf-8">
+</head>
+<style>
+    form {
+        padding: 50px;
+    }
+</style>
+<script src="jquery-3.6.1.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form>
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="nameHelp"
+                           placeholder="用户名">
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control" id="password" placeholder="密码">
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">记住我</label>
+                </div>
+                <button class="btn btn-primary">登录</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $("button").click(function () {
+        $.get("/api/login.php?username=" + $("#username").val() + "&password=" + $("#password").val(), function (data) {
+            if (data.code === 100) {
+                alert("登陆成功")
+                window.location.href = "index.html"
+            }
+            if (data.code === -200) {
+                alert(data.message)
+            }
+            if (data.code === -300) {
+                alert(data.message)
+            }
+        })
+
+
+    })
+</script>
+</body>
+</html>
